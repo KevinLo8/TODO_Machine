@@ -1,20 +1,24 @@
 import './App.css'
+import { CreateTodoButton } from './Components/CreateTodoButton/CreateTodoButton';
+import { TodoCounter } from './Components/TodoCounter/TodoCounter';
+import { TodoItem } from './Components/TodoItem/TodoItem';
+import { TodoList } from './Components/TodoList/TodoList';
+import { TodoSearch } from './Components/TodoSearch/TodoSearch';
 
 function App() {
   return (
-    
-    <TodoItem />
+    <div className='App'>
+      <TodoCounter />
+      <TodoSearch />
 
-  );
-}
+      <TodoList>
+        <TodoItem />
+        <TodoItem />
+        <TodoItem />
+      </TodoList>
 
-function TodoItem() {
-  return (
-    <li>
-      <span>V</span>
-      <h1>Llorar con la Llorona</h1>
-      <span>X</span>
-    </li>
+      <CreateTodoButton />
+    </div>
   );
 }
 
