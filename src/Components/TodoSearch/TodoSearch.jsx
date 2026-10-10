@@ -1,8 +1,12 @@
 import './TodoSearch.css';
 
-function TodoSearch() {
+function TodoSearch(props) {
     return (
-        <input className="search-input" placeholder="Cortar Cebollas" />
+        <input className="search-input" value={props.searchValue} placeholder="Cortar Cebollas" onChange={
+            (event) => {
+                props.setSearchValue(event.target.value);
+            }
+        }/>
     );
 }
 
