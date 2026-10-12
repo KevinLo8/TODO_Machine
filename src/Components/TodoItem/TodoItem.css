@@ -1,0 +1,54 @@
+.row-list {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    border-style: double;
+    background-color: aliceblue;
+    box-shadow: 8px 8px 10px rgb(0, 0, 0);
+}
+
+.text-item {
+    margin: 24px 0 24px 24px;
+    width: calc(100% - 120px);
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 400;
+}
+
+.text-item--complete {
+  text-decoration: line-through;
+}
+
+.icon {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 48px;
+  width: 48px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.check-icon {
+    position: absolute;
+    font-size: 28px;
+    left: 15px;
+}
+
+.check-icon--active {
+  color: #4caf50;
+}
+
+.delete-icon {
+    font-size: 28px;
+    position: absolute;
+    top: -25px;
+    right: 10px;
+}
+
+.delete-icon:hover {
+    color: red;
+}
