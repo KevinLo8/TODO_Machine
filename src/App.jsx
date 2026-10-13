@@ -5,29 +5,40 @@ import { TodoItem } from './Components/TodoItem/TodoItem';
 import { TodoList } from './Components/TodoList/TodoList';
 import { TodoSearch } from './Components/TodoSearch/TodoSearch';
 
-const defaultTodos = [
-  { text: 'Cortar Cebolla', completed: true },
-  { text: 'Tomar El curso a intro a React.js', completed: false },
-  { text: 'Llorar con la Llorona', completed: false },
-  { text: 'LALALALALA', completed: false }
-];
-
 function App() {
-  const [todos, setTodos] = React.useState(defaultTodos);
+  const storage = 'TODOs_V1';
+
+  const localStorageTodos = localStorage.getItem(storage);
+
+  let parsedTodos;
+
+  if (!localStorageTodos) {
+    localStorage.setItem(storage, JSON.stringify([]));
+    parsedTodos = [];
+  } else {
+    parsedTodos = JSON.parse(localStorageTodos);
+  }
+
+  const [todos, setTodos] = React.useState(parsedTodos);
   const [searchValue, setSearchValue] = React.useState('');
+
+  const updateTodos = (newTodos) => {
+    localStorage.setItem(storage, JSON.stringify(newTodos));
+    setTodos(newTodos);
+  }
 
   const completedTodos = todos.filter(todo => !!todo.completed).length;
   const totalTodos = todos.length;
 
   const searchedTodos = todos.filter(todo => todo.text.toLowerCase().includes(searchValue.toLowerCase()));
-  
+
   const completeTodo = (text) => {
     const newTodos = [...todos];
     const indexTodo = newTodos.findIndex(
       (todo) => todo.text == text
     );
     newTodos[indexTodo].completed = true;
-    setTodos(newTodos);
+    updateTodos(newTodos);
   };
 
   const deleteTodo = (text) => {
@@ -36,7 +47,7 @@ function App() {
       (todo) => todo.text == text
     );
     newTodos.splice(indexTodo, 1);
-    setTodos(newTodos);
+    updateTodos(newTodos);
   };
 
   return (
