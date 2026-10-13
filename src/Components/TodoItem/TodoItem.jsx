@@ -1,15 +1,15 @@
+import { CheckIcon } from '../../Icons/CheckIcon';
+import { DeleteIcon } from '../../Icons/DeleteIcon';
 import './TodoItem.css';
 
 function TodoItem(promp) {
   return (
     <li className='row-list'>
 
-      <span
-        className={`icon check-icon ${promp.completed && "check-icon--active"}`}
-        onClick={promp.onComplete}
-      >
-        V
-      </span>
+      <CheckIcon
+        completed={promp.completed}
+        onComplete={promp.onComplete}
+      />
 
       <p
         className={`text-item ${promp.completed && "text-item--complete"}`}
@@ -17,12 +17,9 @@ function TodoItem(promp) {
         {promp.text}
       </p>
 
-      <span
-        className='icon delete-icon'
-        onClick={promp.onDelete}
-      >
-        X
-      </span>
+      <DeleteIcon
+        onDelete={promp.onDelete}
+      />
 
     </li>
   );
