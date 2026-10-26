@@ -9,16 +9,24 @@ function TodoCounter() {
     } = React.useContext(TodoContext);
 
     return (
+        
+        totalTodos == 0 ?
 
-        (totalTodos == completedTodos && totalTodos > 0) ?
-
-            <h1 className='notification' >Felicidades, has completado todas tu ToDos</h1>
+            <h1 className='notification' >No existe ningun ToDo</h1>
 
             :
 
-            <h1 className='notification' >
-                Has Completado <span className='completed-span'>{completedTodos}</span> de <span className='total-span'>{totalTodos}</span> ToDos
-            </h1>
+            (
+                totalTodos == completedTodos ?
+
+                    <h1 className='notification' >Felicidades, has completado todas tu ToDos</h1>
+
+                    :
+
+                    <h1 className='notification' >
+                        Has Completado <span className='completed-span'>{completedTodos}</span> de <span className='total-span'>{totalTodos}</span> ToDos
+                    </h1>
+            )
 
     );
 }
