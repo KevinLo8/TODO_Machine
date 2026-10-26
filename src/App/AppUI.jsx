@@ -1,3 +1,4 @@
+import React from 'react';
 import { CreateTodoButton } from '../Components/CreateTodoButton';
 import { TodoCounter } from '../Components/TodoCounter';
 import { TodoItem } from '../Components/TodoItem';
@@ -6,22 +7,25 @@ import { TodoSearch } from '../Components/TodoSearch';
 import { TodosLoading } from '../Components/TodosLoading';
 import { TodosError } from '../Components/TodosError';
 import { TodosEmpty } from '../Components/TodosEmpty';
+import { TodoContext } from '../Components/TodoContext/TodoContext';
 
-function AppUI(props) {
+function AppUI() {
+    const {
+        searchedTodos,
+        completeTodo,
+        deleteTodo,
+        loading,
+        error
+    } = React.useContext(TodoContext);
+
     return (
         <>
-            <TodoCounter
-                completed={props.completedTodos}
-                total={props.totalTodos}
-            />
+            <TodoCounter />
 
-            <TodoSearch
-                searchValue={props.searchValue}
-                setSearchValue={props.setSearchValue}
-            />
+            <TodoSearch />
 
             <TodoList>
-                {props.loading && (
+                {loading && (
                     <>
                         <TodosLoading />
                         <TodosLoading />
@@ -29,18 +33,18 @@ function AppUI(props) {
                         <TodosLoading />
                     </>
                 )}
-                {props.error && <TodosError />}
-                {(!props.loading && props.searchedTodos.length == 0) && <TodosEmpty />}
+                {error && <TodosError />}
+                {(!loading && searchedTodos.length == 0) && <TodosEmpty />}
 
 
-                {props.searchedTodos.map(todo => (
+                {searchedTodos.map(todo => (
 
                     <TodoItem
                         key={todo.text}
                         text={todo.text}
                         completed={todo.completed}
-                        onComplete={() => props.completeTodo(todo.text)}
-                        onDelete={() => props.deleteTodo(todo.text)}
+                        onComplete={() => completeTodo(todo.text)}
+                        onDelete={() => deleteTodo(todo.text)}
                     />
 
                 ))}
